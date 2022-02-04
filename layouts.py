@@ -1,7 +1,6 @@
 import dash_core_components as dcc
 import dash_html_components as html
 import dash_bootstrap_components as dbc
-import plotly.express as px
 import pandas as pd
 
 
@@ -14,10 +13,10 @@ df = pd.DataFrame()
 layout = html.Div([
     dcc.Location(id='url', refresh=True),
     dcc.Interval(id='interval1',
-                 interval=1400,  # in milliseconds
+                 interval=600,
                  n_intervals=0),
     dcc.Interval(id='interval2',
-                 interval=220,  # in milliseconds
+                 interval=160,
                  n_intervals=0),
     html.Div([  # header
         html.Div([
@@ -27,7 +26,7 @@ layout = html.Div([
                 width='auto')
         ], className='col-2', style=head_div_style),
         html.Div([
-            html.H1('Rowing Corrector pa')
+            html.H1('Rowing Corrector')
         ], className='col-8'),
         html.Div([
             html.Img(
@@ -40,15 +39,15 @@ layout = html.Div([
 
     html.Div([
         dbc.Row([
-            dcc.Graph(id='asdasd')
+            dcc.Graph(id='graph_1')
             ]),
         dbc.Row(
-            dcc.RadioItems(id='checklist', options=[{'label': 'Predict', 'value': 'predict'},
-                                                    {'label': 'Read Square', 'value': 'squar'},
-                                                    {'label': 'Read Circle', 'value': 'circl'},
-                                                    {'label': 'Read Rest', 'value': 'rest'}],
+            dcc.RadioItems(id='checklist', options=[{'label': 'Clasificar', 'value': 'predict'},
+                                                    {'label': 'Leer Descanso', 'value': 'rest'},
+                                                    {'label': 'Leer Técnica Correcta', 'value': 'correct'},
+                                                    {'label': 'Leer Técnica Incorrecta', 'value': 'incorrect'}],
                            value='predict', labelStyle={'display': 'inline-block', 'margin-left': '2%'})
         ),
-        dbc.Row(html.H1("CLASIFICACIÓN", id='label'), className='my-5', style={'text-align': 'center'})
+        dbc.Row(html.H1("CLASIFICACIÓN", id='label', style={'font-size': 37}), className='my-5', style={'text-align': 'center'})
     ], className='col-12 align-items-center', style=big_div_style)
 ], className='container')

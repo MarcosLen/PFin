@@ -1,19 +1,16 @@
 import serial
-from collections import deque
+from time import time
 
+ser = serial.Serial(port='COM3', baudrate=74880)  # 115200 , 38400
 
-ser = serial.Serial(port='COM3', baudrate=115200)
-datos = deque(maxlen=100)
-for _ in range(100):
-    datos.append(0)
+while True:
+    start = time()
+    # Read data out of the buffer until a carraige return / new line is found
+    # ser.reset_input_buffer()
+    serialString = ser.readline()
+    # serialString = ser.readline()
 
-# while True:
-#     # Read data out of the buffer until a carraige return / new line is found
-#     serialString = ser.readline()
-#
-#     # Print the contents of the serial data
-#     dato = serialString.decode('Ascii')
-#     print(dato)
-#     lista = dato.split(sep='\t')
-#     lista = list(map(int, lista))
-#     print(lista)
+    dato = serialString.decode('Ascii')
+    lista = dato.split(sep='\t')
+    lista = list(map(int, lista))
+    print(time()-start, len(lista), lista)
